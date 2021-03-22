@@ -10,8 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $servicos = Servico::all();
-        
-        return view('home',compact('servicos'));
+        $servicos = Servico::limit(3)->get(); // select * from servicos limit 3
+
+        return view('pages.home',compact('servicos'));
     }
 }

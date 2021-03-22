@@ -9,11 +9,11 @@ class ContatoController extends Controller
 {
 
     public function index()
-    {  
+    {
         $contato = Contato::all();
 
-        return view('contato',compact('contato'));
-        
+        return view('pages.contato',compact('contato'));
+
     }
 
     public function adicionar()

@@ -11,8 +11,8 @@ class ServicoController extends Controller
 {
     public function index()
     {
-        $registros = Servico::all();
-        return view('admin.servicos.index', compact('registros'));
+        $servicos = Servico::all();
+        return view('admin.servicos.index', compact('servicos'));
     }
 
     public function adicionar()
@@ -22,13 +22,8 @@ class ServicoController extends Controller
 
     public function salvar(Request $req)
     {
-        $dados = $req->all();
-
-        if(isset($dados['publicado'])){
-            $dados['publicado'] = 'sim';
-        }else{
-            $dados['publicado'] = 'nao';
-        }
+        $servico = new Servico;
+        $imagemSalva = null;
 
         if($req->hasFile('imagem')){
             $imagem = $req->file('imagem');
@@ -37,31 +32,31 @@ class ServicoController extends Controller
             $ex = $imagem->guessClientExtension();
             $nomeImagem = "imagem_".$num.".".$ex;
             $imagem->move($dir,$nomeImagem);
-            $dados['imagem'] = $dir ."/".$nomeImagem;
+            $imagemSalva = $dir . $nomeImagem;
         }
 
-        Servico::create($dados);
+        $servico->titulo = $req->titulo;
+        $servico->descricao = $req->descricao;
+        $servico->valor = $req->valor;
+        $servico->publicado = $req->publicado ? true : false;
+        $servico->imagem = $imagemSalva;
 
-        return redirect()->route('admin.servicos');
 
+        if($servico->save()){
+            return redirect()->route('admin.servicos');
+        }
     }
 
      public function editar($id)
      {
-        $registro = Servico::find($id);
+        $servico = Servico::find($id);
 
-        return view('admin.servicos.editar',compact('registro'));
+        return view('admin.servicos.editar',compact('servico'));
      }
 
      public function atualizar(Request $req, $id)
      {
         $dados = $req->all();
-
-        if (isset($dados['publicado'])) {
-            $dados['publicado'] = 'sim';
-        } else {
-            $dados['publicado'] = 'nao';
-        }
 
         if ($req->hasFile('imagem')) {
             $imagem = $req->file('imagem');
@@ -75,7 +70,7 @@ class ServicoController extends Controller
 
         Servico::find($id)->update($dados);
         return redirect()->route('admin.servicos');
-         }  
+         }
 
         public function deletar($id)
         {

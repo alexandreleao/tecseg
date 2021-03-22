@@ -11,7 +11,7 @@ class PortifolioController extends Controller
     {
         $servicos = Servico::all();
 
-        return view('portifolio',compact('servicos'));
+        return view('pages.portifolio',compact('servicos'));
 
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +17,7 @@ Route::get('/', ['as' => 'site.home', 'uses' => 'Site\HomeController@index']);
 Route::get('/portifolio', ['as' => 'site.portifolio', 'uses' => 'Site\PortifolioController@index']);
 Route::get('/contato',['as'=>'site.contato', 'uses' => 'Site\ContatoController@index']);
 Route::post('/contato/salvar', ['as' => 'site.contato.salvar', 'uses' => 'Site\ContatoController@salvar']);
-         
+
 
 Route::get('/admin/servicos',['as'=>'admin.servicos','uses'=>'Admin\ServicoController@index']);
 Route::get('/admin/servicos/adicionar',['as'=>'admin.servicos.adicionar','uses'=>'Admin\ServicoController@adicionar']);

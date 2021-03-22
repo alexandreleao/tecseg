@@ -18,16 +18,16 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($registros as $registro)
+          @foreach($servicos as $servico)
             <tr>
-              <td>{{ $registro->id }}</td>
-              <td>{{ $registro->titulo }}</td>
-              <td>{{ $registro->descricao }}</td>
-              <td><img height="60" src="{{asset($registro->imagem)}}" alt="{{ $registro->titulo }}" /></td>
-              <td>{{ $registro->publicado }}</td>
+              <td>{{ $servico->id }}</td>
+              <td>{{ $servico->titulo }}</td>
+              <td>{{ $servico->descricao }}</td>
+              <td><img height="60" src="{{asset($servico->imagem)}}" alt="{{ $servico->titulo }}" /></td>
+              <td>{{ $servico->publicado }}</td>
               <td>
-                <a class="btn blue" href="{{ route('admin.servicos.editar',$registro->id) }}">Editar</a>
-                <a class="btn red" href="{{ route('admin.servicos.deletar',$registro->id) }}">Deletar</a>
+                <a class="btn blue" href="{{ route('admin.servicos.editar',$servico->id) }}">Editar</a>
+                <a class="btn red" href="{{ route('admin.servicos.deletar',$servico->id) }}">Deletar</a>
               </td>
             </tr>
           @endforeach

@@ -1,19 +1,18 @@
 <div class="input-field">
    <label>Título</label>
-  <input type="text" name="titulo" value="{{isset($registro->titulo) ? $registro->titulo : ''}}">
- 
+  <input type="text" name="titulo" value="{{isset($servico->titulo) ? $servico->titulo : ''}}">
+
 </div>
 
 <div class="input-field">
    <label>Descrição</label>
-  <input type="text" name="descricao" value="{{isset($registro->descricao) ? $registro->descricao : ''}}">
- 
+  <input type="text" name="descricao" value="{{isset($servico->descricao) ? $servico->descricao : ''}}">
+
 </div>
 
 <div class="input-field">
   <label>Valor</label>
-  <input type="text" name="valor" value="{{isset($registro->valor) ? $registro->valor : ''}}">
-  
+  <input type="text" name="valor" value="{{isset($servico->valor) ? $servico->valor : ''}}">
 </div>
 
 <div class="file-field  input-field">
@@ -27,16 +26,27 @@
   </div>
 </div>
 
-@if(isset($registro->imagem))
+@if(isset($servico->imagem))
 <div class="input-field">
-  <img width="150" src="{{asset($registro->imagem)}}" />
+  <img width="150" src="{{asset($servico->imagem)}}" />
 </div>
 @endif
 
-<div class="input-field">
-  <p>
-      <input type="checkbox" id="test5" name="publicado" {{isset($registro->publicado) && $registro->publicado == 'sim' ? 'checked' : '' }} value="true">
-      <label for="test5">Publicar?</label>
- </p>
+<p>
+    <input type="checkbox"
+        @if(isset($servico->publicado))
+            checked
+        @endif
+        class="filled-in" id="test5" name="publicado">
+    <label for="test5">Publicar?</label>
     <br><br>
-</div>
+</p>
+
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+
+        });
+    </script>
+@stop
