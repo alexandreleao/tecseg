@@ -19,13 +19,14 @@ use Illuminate\Support\Facades\Route;
     Route::get('/login', ['as' => 'site.login', 'uses' => 'Site\LoginController@index']);
     Route::get('/login/sair', ['as' => 'site.login.sair', 'uses' => 'Site\LoginController@sair']);
     Route::post('/login/entrar', ['as' => 'site.login.entrar', 'uses' => 'Site\LoginController@entrar']);
-
+    Route::get('/cadastro', ['as'=> 'site.cadastro', 'uses' => 'Site\LoginController@cadastro']);
+    Route::post('/novo-usuario', ['as'=> 'site.novo.usuario', 'uses' => 'Site\LoginController@criarUsuario']);
 
     Route::get('/portifolio', ['as' => 'site.portifolio', 'uses' => 'Site\PortifolioController@index']);
     Route::get('/contato',['as'=>'site.contato', 'uses' => 'Site\ContatoController@index']);
     Route::post('/contato/salvar', ['as' => 'site.contato.salvar', 'uses' => 'Site\ContatoController@salvar']);
 
-   
+
   Route::group(['middleware', 'auth'], function(){
     Route::get('/admin/servicos', ['as' => 'admin.servicos', 'uses' => 'Admin\ServicoController@index']);
     Route::get('/admin/servicos/adicionar', ['as' => 'admin.servicos.adicionar', 'uses' => 'Admin\ServicoController@adicionar']);

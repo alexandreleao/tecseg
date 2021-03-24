@@ -14,7 +14,9 @@
             @endif
             <li><a href="{{ route('site.portifolio') }}">Portifólio</a></li>
             <li><a href="{{ route('site.contato') }}">Contato</a></li>
+            @auth()
             <li><a href="{{ route('site.login.sair') }}">Sair</a></li>
+            @endauth
         </ul>
         <ul class="side-nav" id="mobile">
             <li><a href="{{ route('site.home') }}">Home</a></li>
@@ -26,6 +28,9 @@
              @endif
             <li><a href="{{ route('site.portifolio') }}">Portifólio</a></li>
             <li><a href="{{ route('site.contato') }}">Contato</a></li>
+            @auth()
+            <li><a href="{{ route('site.login.sair') }}">Sair</a></li>
+            @endauth
         </ul>
     </div>
 </nav>
