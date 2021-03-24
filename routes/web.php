@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+#Erro Laravel informa que a rota não foi encontrada a realizar o login.
 
     Route::get('/', ['as' => 'site.home', 'uses' => 'Site\HomeController@index']);
 
@@ -37,7 +37,4 @@ use Illuminate\Support\Facades\Route;
     Route::put('/admin/servicos/atualizar/{id}', ['as' => 'admin.servicos.atualizar', 'uses' => 'Admin\ServicoController@atualizar']);
     Route::get('/admin/servicos/deletar/{id}', ['as' => 'admin.servicos.deletar', 'uses' => 'Admin\ServicoController@deletar']);
 });
-    
-
-    
-    
+  
