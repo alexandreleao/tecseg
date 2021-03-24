@@ -13,22 +13,19 @@ class LoginController extends Controller
         return view('login.index');
     }
 
+   public function entrar(Request $req)
+   {
+       $entrar = $req->all();
+       if(Auth::attempt(['email'=>$entrar['email'],'password'=>$entrar['senha']])){
+            return redirect()->route('admin.servicos');
+       }
+       return redirect()->route('login.index');
+   }
 
-    public function entrar(Request $req)
-    {
-        $entrar = $req->all();
-
-        if(Auth::attempt(['email'=>$entrar['email'],'password'=>$entrar['senha']])){
-            
-            return redirect()->route('admin.servicos'); 
-        }
-
-        return redirect()->route('login.index');
-    }
-
-    public function sair()
-    {
+   public function sair()
+   {
        Auth::logout();
-      return redirect()->route('site.home');
-    }
+       return redirect()->route('site.home');
+   }
+    
 }

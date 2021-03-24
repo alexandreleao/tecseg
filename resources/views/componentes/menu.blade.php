@@ -5,15 +5,25 @@
         </a>
         <a href="{{ route('site.home') }}" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down" style="padding-right: 15px;">
-            <li><a href="#">Login</a></li>
             <li><a href="{{ route('site.home') }}">Home</a></li>
-            <li><a href="{{ route('admin.servicos') }}">Serviços</a></li>
+            @if(Auth::guest())
+             <li><a href="{{ route('site.login') }}">Login</a></li>
+            @else
+             <li><a href="{{ route('admin.servicos') }}">Serviços</a></li>
+             <li><a href="#">{{Auth::user()->name}}</a></li>
+            @endif
             <li><a href="{{ route('site.portifolio') }}">Portifólio</a></li>
             <li><a href="{{ route('site.contato') }}">Contato</a></li>
+            <li><a href="{{ route('site.login.sair') }}">Sair</a></li>
         </ul>
         <ul class="side-nav" id="mobile">
             <li><a href="{{ route('site.home') }}">Home</a></li>
-            <li><a href="{{ route('admin.servicos') }}">Serviços</a></li>
+             @if(Auth::guest())
+             <li><a href="{{ route('site.login') }}">Login</a></li>
+             @else
+             <li><a href="{{ route('admin.servicos') }}">Serviços</a></li>
+             <li><a href="#">{{Auth::user()->name}}</a></li>
+             @endif
             <li><a href="{{ route('site.portifolio') }}">Portifólio</a></li>
             <li><a href="{{ route('site.contato') }}">Contato</a></li>
         </ul>

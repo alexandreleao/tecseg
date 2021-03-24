@@ -1,6 +1,6 @@
  @extends('layout.tecseg')
 
-   @section('titulo','Adicionar')
+   @section('titulo','Login')
 
    @section('content')
         <div class="container">
