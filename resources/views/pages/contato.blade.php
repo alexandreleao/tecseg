@@ -14,6 +14,9 @@
             <button class="btn blue darken-3">Salvar</button>
         </form>
     </div>
+    <div class="row">
+        @include('componentes.erros', ['errors' => $errors])
+    </div>
 </div>
 
 @endsection
