@@ -9,7 +9,7 @@ class PortifolioController extends Controller
 {
     public function index()
     {
-        $servicos = Servico::all();
+        $servicos = Servico::limit(3)->get();
 
         return view('pages.portifolio',compact('servicos'));
 

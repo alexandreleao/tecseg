@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Servico;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ServicoController extends Controller
 {
@@ -22,6 +23,29 @@ class ServicoController extends Controller
 
     public function salvar(Request $req)
     {
+
+        $validator = Validator::make($req->all(), $this->configServicoRules());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+        $credenciais = $req->only(
+            ['titulo' =>'required', 
+            'descricao' =>'required', 
+            'valor' =>'required', 
+            'imagem'=>'required',
+            'publicado' => 'required'
+         ]);
+
+        if (Auth::attempt($credenciais)) {
+            return redirect()->route('admin.servicos');
+        }
+
+        return redirect()->back()->withErrors([
+            'message' => 'Não foi possível cadastrar o serviço!'
+        ]);
+
+      
         $servico = new Servico;
         $imagemSalva = null;
 
@@ -70,11 +94,22 @@ class ServicoController extends Controller
 
         Servico::find($id)->update($dados);
         return redirect()->route('admin.servicos');
-         }
+        }
 
         public function deletar($id)
         {
             Servico::find($id)->delete();
             return redirect()->route('admin.servicos');
         }
+
+    public function configServicoRules()
+    {
+        return [
+            'titulo' => 'required',
+            'descricao' => 'required',
+            'valor' => 'required',
+            'imagem' => 'required',
+            'publicado' => 'required'
+        ];
+    }
 }
