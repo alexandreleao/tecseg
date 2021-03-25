@@ -47,4 +47,6 @@ class User extends Authenticatable
     {
         $this->attributes['remember_token'] = $value ? Str::random(40): null;
     }
+
+    // Mudança Arquivo User
 }
