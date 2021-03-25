@@ -35,3 +35,15 @@ use Illuminate\Support\Facades\Route;
     Route::put('/admin/servicos/atualizar/{id}', ['as' => 'admin.servicos.atualizar', 'uses' => 'Admin\ServicoController@atualizar']);
     Route::get('/admin/servicos/deletar/{id}', ['as' => 'admin.servicos.deletar', 'uses' => 'Admin\ServicoController@deletar']);
 });
+
+Route::get('teste', function(){
+
+    $usuario = \App\User::where('email', 'admin@mail.com')->get()->first();
+
+   $usuario->load('funcao');
+
+    return response()->json([
+
+        $usuario
+    ]);
+});

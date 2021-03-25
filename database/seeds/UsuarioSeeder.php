@@ -15,13 +15,11 @@ class UsuarioSeeder extends Seeder
         $dados= [
             'name'=>"Alexandre",
             'email'=>"admin@mail.com",
-            'password'=>bcrypt("123456"),
+            'password'=> "123456",
+            'funcao_id' => 1
         ];
-        if(User::where('email','=',$dados['email'])->count()){
-            $usuario = User::where('email','=',$dados['email'])->first();
-            $usuario->update($dados);
-        }else{
-            User::create($dados);
-        }
+
+        User::create($dados);
+
     }
 }

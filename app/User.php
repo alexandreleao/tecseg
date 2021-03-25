@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const FUNCAO_DEFAULT = 2;
     /**
      * The attributes that are mass assignable.
      *
@@ -42,11 +43,18 @@ class User extends Authenticatable
     {
         $this->attributes['password'] =  bcrypt($value);
     }
+    public function setFuncaoIdAttribute($value)
+    {
+        $this->attributes['funcao_id'] = $value ? $value : self::FUNCAO_DEFAULT;
+    }
 
     public function setRememberTokenAttribute($value)
     {
         $this->attributes['remember_token'] = $value ? Str::random(40): null;
     }
 
-    // Mudança Arquivo User
+    public function funcao()
+    {
+        return $this->belongsTo(Funcao::class, 'funcao_id', 'id');
+    }
 }
