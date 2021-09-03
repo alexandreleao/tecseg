@@ -14,6 +14,7 @@
             @endif
             <li><a href="{{ route('site.portifolio') }}">Portifólio</a></li>
             <li><a href="{{ route('site.contato') }}">Contato</a></li>
+            <li><a href="#">Orçamentos</a></li>
             @auth()
             <li><a href="{{ route('site.login.sair') }}">Sair</a></li>
             @endauth

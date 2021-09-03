@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
     Route::post('/login/entrar', ['as' => 'site.login.entrar', 'uses' => 'Site\LoginController@entrar']);
     Route::get('/cadastro', ['as'=> 'site.cadastro', 'uses' => 'Site\LoginController@cadastro']);
     Route::post('/novo-usuario', ['as'=> 'site.novo.usuario', 'uses' => 'Site\LoginController@criarUsuario']);
-
+    Route::get('/servicos/{id}', 'Admin\ServicoController@getServico')->name('servico.id');
+    Route::get('/orcamento/{id}','Admin\OrcamentoController@getOrcamento');
     Route::get('/portifolio', ['as' => 'site.portifolio', 'uses' => 'Site\PortifolioController@index']);
     Route::get('/contato',['as'=>'site.contato', 'uses' => 'Site\ContatoController@index']);
     Route::post('/contato/salvar', ['as' => 'site.contato.salvar', 'uses' => 'Site\ContatoController@salvar']);

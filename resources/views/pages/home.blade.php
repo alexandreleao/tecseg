@@ -19,7 +19,7 @@
                 <p>{{$servico->descricao}}</p>
             </div>
             <div class="card-action">
-                <a href="#">Ver mais...</a>
+                <a href="{{route('servico.id', ['id' => $servico->id])}}">Ver mais...</a>
             </div>
             </div>
         </div>

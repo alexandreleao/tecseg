@@ -88,4 +88,15 @@ class ServicoController extends Controller
             'publicado' => 'required'
         ];
     }
+
+
+
+    public function getServico($id)
+    {
+        $servico = Servico::findOrFail($id);
+
+        return view('pages.servico', [
+            'servico' => $servico
+        ]);
+    }
 }
