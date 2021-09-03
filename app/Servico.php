@@ -11,5 +11,8 @@ class Servico extends Model
     ];
 
 
-
+    public function setPublicadoAttribute($value)
+    {
+        $this->attributes['publicado'] = $value == 'on' ? true : false;
+    }
 }

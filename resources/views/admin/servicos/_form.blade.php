@@ -19,7 +19,7 @@
 
   <div class="btn blue">
     <span>Imagem</span>
-    <input type="file" name="imagem">
+    <input type="file" name="imagemUpload">
   </div>
   <div class="file-path-wrapper">
     <input class="file-path validate" type="text">

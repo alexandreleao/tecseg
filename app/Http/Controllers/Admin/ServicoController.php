@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Servico;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\SaveFile;
 
 class ServicoController extends Controller
 {
+    use SaveFile; 
+
     public function index()
     {
         $servicos = Servico::all();
@@ -25,50 +28,23 @@ class ServicoController extends Controller
     {
 
         $validator = Validator::make($req->all(), $this->configServicoRules());
+        
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $credenciais = $req->only(
-            ['titulo' =>'required', 
-            'descricao' =>'required', 
-            'valor' =>'required', 
-            'imagem'=>'required',
-            'publicado' => 'required'
-         ]);
-
-        if (Auth::attempt($credenciais)) {
-            return redirect()->route('admin.servicos');
-        }
-
-        return redirect()->back()->withErrors([
-            'message' => 'Não foi possível cadastrar o serviço!'
-        ]);
-
-      
         $servico = new Servico;
-        $imagemSalva = null;
-
-        if($req->hasFile('imagem')){
-            $imagem = $req->file('imagem');
-            $num = rand(1111, 9999);
-            $dir ="img/servicos/";
-            $ex = $imagem->guessClientExtension();
-            $nomeImagem = "imagem_".$num.".".$ex;
-            $imagem->move($dir,$nomeImagem);
-            $imagemSalva = $dir . $nomeImagem;
+        $servico->fill($validator->valid());
+        $servico->imagem = $this->saveFile($req);
+        
+        if(!$servico->save()){
+            return redirect()
+                ->back()
+                ->withErrors(['message', 'Não foi possível adicionar o serviço'])
+                ->withInput();
         }
 
-        $servico->titulo = $req->titulo;
-        $servico->descricao = $req->descricao;
-        $servico->valor = $req->valor;
-        $servico->publicado = $req->publicado ? true : false;
-        $servico->imagem = $imagemSalva;
-
-
-        if($servico->save()){
-            return redirect()->route('admin.servicos');
-        }
+        return redirect()->route('admin.servicos');
     }
 
      public function editar($id)
@@ -107,8 +83,8 @@ class ServicoController extends Controller
         return [
             'titulo' => 'required',
             'descricao' => 'required',
-            'valor' => 'required',
-            'imagem' => 'required',
+            'valor' => 'required|integer',
+            'imagemUpload' => 'required',
             'publicado' => 'required'
         ];
     }
