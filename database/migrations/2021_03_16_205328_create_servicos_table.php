@@ -15,12 +15,15 @@ class CreateServicosTable extends Migration
     {
         Schema::create('servicos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('dono_id')->unsigned();
             $table->string('titulo');
             $table->string('descricao');
             $table->string('imagem');
-            $table->decimal('valor', 19,2);
+            $table->decimal('valor');
             $table->boolean('publicado')->default(false);
             $table->timestamps();
+
+            $table->foreign('dono_id')->references('id')->on('users');
         });
     }
 

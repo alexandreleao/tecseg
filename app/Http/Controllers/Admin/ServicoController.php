@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Servico;
+use App\Models\Servico;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\SaveFile;
@@ -16,12 +16,13 @@ class ServicoController extends Controller
     public function index()
     {
         $servicos = Servico::all();
+
         return view('admin.servicos.index', compact('servicos'));
     }
 
     public function adicionar()
     {
-        return view('admin.servicos.adicionar');
+        return view('forms.adicionar');
     }
 
     public function salvar(Request $req)
@@ -98,5 +99,27 @@ class ServicoController extends Controller
         return view('pages.servico', [
             'servico' => $servico
         ]);
+    }
+
+
+    public function getServicoJson($id)
+    {
+        $servico = Servico::with(['dono'])->findOrfail($id);
+
+
+        return response()->json([
+            'servico' => $servico
+        ], 200);
+    }
+
+
+    public function getServicosJson()
+    {
+        $servicos = Servico::with('dono')->paginate(10);
+
+
+        return response()->json([
+            'servico' => $servicos
+        ], 200);
     }
 }

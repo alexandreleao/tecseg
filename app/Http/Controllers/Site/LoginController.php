@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CadastroRequest;
@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login.index');
+        return view('forms.login');
     }
 
    public function entrar(Request $req)

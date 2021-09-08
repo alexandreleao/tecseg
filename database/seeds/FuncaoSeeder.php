@@ -11,8 +11,8 @@ class FuncaoSeeder extends Seeder
      */
     public function run()
     {
-        \App\Funcao::create(['nome'=> 'Administrador']);
-        \App\Funcao::create(['nome'=> 'Cliente']);
-        \App\Funcao::create(['nome'=> 'Empregado']);
+        \App\Models\Funcao::create(['nome'=> 'Administrador']);
+        \App\Models\Funcao::create(['nome'=> 'Cliente']);
+        \App\Models\Funcao::create(['nome'=> 'Empregado']);
     }
 }

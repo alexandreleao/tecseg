@@ -27,4 +27,48 @@
     </div>
     
 </div>
+
+<div class="container" id="app">
+    <span v-bind:title="message">
+        Hover your mouse over me for a few seconds to see my dynamically bound
+        title!
+    </span>
+    <ul>
+        <li v-for="servico in servicos" @click="getServico(servico.id)">
+            @{{servico.id}} - @{{servico.titulo}}
+        </li>
+    </ul>
+</div>
+
+@endsection
+
+
+@section('js')
+<script>
+
+const AttributeBinding = {
+  data() {
+    return {
+      message: 'Você carregou essa página: ' + new Date().toLocaleString(),
+      servicos: JSON.parse(@json($servicos->toJson()))
+    }
+  },
+  methods:{
+    getServico(id)
+    {
+        const URLservico = `/servicos/json/${id}`
+        console.log(URLservico);
+        $.ajax({
+            url: URLservico,
+            dataType: "json"
+        }).done(function(resp) {
+            console.log(resp)
+        });
+    }
+  }
+}
+
+Vue.createApp(AttributeBinding).mount('#app')
+
+</script>
 @endsection

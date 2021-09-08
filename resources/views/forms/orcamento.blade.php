@@ -1,3 +1,6 @@
+
+<form class="" action="{{ $action }}" method="{{ $method }}" enctype="multipart/form-data">
+  {{ csrf_field() }}
 <div class="input-field">
    <label>Nome do Cliente</label>
   <input type="text" name="nome" value="{{isset($orcamento->nome) ? $orcamento->nome : ''}}">
@@ -39,3 +42,5 @@
   <input type="text" name="valorTotal" value="{{isset($orcamento->valorTotal) ? $orcamento->valorTotal : ''}}">
  
 </div>
+<button class="btn blue darken-3">Salvar</button>
+</form>  

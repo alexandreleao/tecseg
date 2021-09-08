@@ -22,19 +22,56 @@ use Illuminate\Support\Facades\Route;
     Route::get('/cadastro', ['as'=> 'site.cadastro', 'uses' => 'Site\LoginController@cadastro']);
     Route::post('/novo-usuario', ['as'=> 'site.novo.usuario', 'uses' => 'Site\LoginController@criarUsuario']);
     Route::get('/servicos/{id}', 'Admin\ServicoController@getServico')->name('servico.id');
-    Route::get('/orcamento/{id}','Admin\OrcamentoController@getOrcamento');
+    
+    Route::get('/orcamento', 'Admin\OrcamentoController@formularioCliente')->name('site.orcamento');
+    Route::post('/orcamento/store', 'Admin\OrcamentoController@store')->name('salvar.orcamento');
+    
     Route::get('/portifolio', ['as' => 'site.portifolio', 'uses' => 'Site\PortifolioController@index']);
     Route::get('/contato',['as'=>'site.contato', 'uses' => 'Site\ContatoController@index']);
     Route::post('/contato/salvar', ['as' => 'site.contato.salvar', 'uses' => 'Site\ContatoController@salvar']);
 
 
   Route::group(['middleware', 'auth'], function(){
-    Route::get('/admin/servicos', ['as' => 'admin.servicos', 'uses' => 'Admin\ServicoController@index']);
-    Route::get('/admin/servicos/adicionar', ['as' => 'admin.servicos.adicionar', 'uses' => 'Admin\ServicoController@adicionar']);
-    Route::post('/admin/servicos/salvar', ['as' => 'admin.servicos.salvar', 'uses' => 'Admin\ServicoController@salvar']);
-    Route::get('/admin/servicos/editar/{id}', ['as' => 'admin.servicos.editar', 'uses' => 'Admin\ServicoController@editar']);
-    Route::put('/admin/servicos/atualizar/{id}', ['as' => 'admin.servicos.atualizar', 'uses' => 'Admin\ServicoController@atualizar']);
-    Route::get('/admin/servicos/deletar/{id}', ['as' => 'admin.servicos.deletar', 'uses' => 'Admin\ServicoController@deletar']);
+    
+    Route::get('/admin/servicos',
+        'Admin\ServicoController@index'
+    )->name('admin.servicos.listar');
+    Route::get('/admin/servicos/editar/{id}',
+        'Admin\ServicoController@editar'
+    )->name('admin.servicos.editar');
+
+    Route::get('/admin/servicos/adicionar',
+        'Admin\ServicoController@adicionar'
+    )->name('admin.servicos.adicionar');
+
+    Route::get('/admin/servicos/adicionar',
+        'Admin\ServicoController@adicionar'
+    )->name('admin.servicos.adicionar');
+
+
+    /*
+    Route::get('/admin/servicos', [
+        'as' => 'admin.servicos', 
+        'uses' => 'Admin\ServicoController@index'
+    ]);
+    
+    Route::get('/admin/servicos/adicionar', [
+        'as' => 'admin.servicos.adicionar', 
+        'uses' => 'Admin\ServicoController@adicionar'
+    ]);
+    */
+
+    //Route::post('/admin/servicos/salvar', ['as' => 'admin.servicos.salvar', 'uses' => 'Admin\ServicoController@salvar']);
+    
+    //Route::get('/admin/servicos/editar/{id}', ['as' => 'admin.servicos.editar', 'uses' => 'Admin\ServicoController@editar']);
+    
+    //Route::put('/admin/servicos/atualizar/{id}', ['as' => 'admin.servicos.atualizar', 'uses' => 'Admin\ServicoController@atualizar']);
+    
+    Route::delete('/admin/servicos/deletar/{id}', ['as' => 'admin.servicos.deletar', 'uses' => 'Admin\ServicoController@deletar']);
+    
+    
+    Route::get('/admin/orcamentos','Admin\OrcamentoController@listaOrcamento')->name('listar.orcamentos');
+    Route::get('/admin/orcamentos/{id}','Admin\OrcamentoController@criarOrcamento')->name('orcamento.id');
 });
 
 Route::get('teste', function(){

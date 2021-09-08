@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Site;
-use App\Contato;
+use App\Models\Contato;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContatoRequest;

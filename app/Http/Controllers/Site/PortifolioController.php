@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Site;
-use App\Servico;
+use App\Models\Servico;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

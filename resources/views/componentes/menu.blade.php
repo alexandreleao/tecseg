@@ -9,12 +9,12 @@
             @if(Auth::guest())
              <li><a href="{{ route('site.login') }}">Login</a></li>
             @else
-             <li><a href="{{ route('admin.servicos') }}">Serviços</a></li>
+             <li><a href="{{ route('admin.servicos.listar') }}">Serviços</a></li>
              <li><a href="#">{{Auth::user()->name}}</a></li>
             @endif
             <li><a href="{{ route('site.portifolio') }}">Portifólio</a></li>
             <li><a href="{{ route('site.contato') }}">Contato</a></li>
-            <li><a href="#">Orçamentos</a></li>
+            <li><a href="{{ route('site.orcamento') }}">Orçamentos</a></li>
             @auth()
             <li><a href="{{ route('site.login.sair') }}">Sair</a></li>
             @endauth
@@ -24,7 +24,7 @@
              @if(Auth::guest())
              <li><a href="{{ route('site.login') }}">Login</a></li>
              @else
-             <li><a href="{{ route('admin.servicos') }}">Serviços</a></li>
+             <li><a href="{{ route('admin.servicos.listar') }}">Serviços</a></li>
              <li><a href="#">{{Auth::user()->name}}</a></li>
              @endif
             <li><a href="{{ route('site.portifolio') }}">Portifólio</a></li>
