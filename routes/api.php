@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/servicos/{id}', 'Admin\ServicoController@getServicoJson')->name('servico.json');
 Route::get('/servicos', 'Admin\ServicoController@getServicosJson')->name('servico.json');
+
+Route::post('/servicos', 'Admin\ServicoController@criar')->name('servico.criar');

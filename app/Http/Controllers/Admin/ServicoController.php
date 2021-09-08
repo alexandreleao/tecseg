@@ -122,4 +122,21 @@ class ServicoController extends Controller
             'servico' => $servicos
         ], 200);
     }
+    public function criar(Request $req)
+    {
+        $validator = Validator::make($req->all(), $this->configServicoRules());
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+                'success' => false
+            ], 422);
+        }
+
+        dd(Auth::id());
+        
+        Servico::create();
+
+        return response()->json([]);
+    }
 }
